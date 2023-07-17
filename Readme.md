@@ -40,3 +40,5 @@ cygrpc - REST 노출 지원을 사용하는 gRPC용 Micro-Framwork.
  - python manage.py runserver
 
 db 관리자에 등록 admin.py
+
+

@@ -1,7 +1,7 @@
 {% load django_bootstrap5 %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
   <head>
     <meta charset="UTF-8">
@@ -9,13 +9,12 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>장고 쇼핑몰</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>colorblossom</title>
   </head>
 
   <body>
-    <h1>
-      장고쇼핑몰</h1>
+    <h1>설문</h1>
 
     {% block content%}{% endblock %}
 

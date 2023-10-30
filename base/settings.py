@@ -15,7 +15,7 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
+
 # dajango-env : https://django-environ.readthedocs.io/en/latest/
 env = environ.Env()
 
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'debug_toolbar',
-     "django_bootstrap5",
+    'django_bootstrap5',
     # local apps
     'accounts',
 ]
@@ -95,7 +95,14 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env.str('DB_NAME',default='colorblossom'),
+        'USER': env.str('DB_USER',default='root'),
+        'PASSWORD': env.str('DB_PASSWORD',default='1234'),
+        'HOST': env.str('DB_HOST',default='127.0.0.1'),
+        'PORT': env.str('DB_PORT',default='3306'),
+    }
 }
 
 
@@ -137,9 +144,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = env.str('STATIC_ROOT', default=BASE_DIR / 'static')
-
-MEDIA_URL = 'media/'
+STATIC_ROOT = env.str('STATIC_ROOT', default=BASE_DIR / 'staticfiles')
+STATICFILES_DIRS = [
+     BASE_DIR / 'static',
+]
+ 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = env.str('MEDIA_ROOT', default=BASE_DIR / 'media')
 
 

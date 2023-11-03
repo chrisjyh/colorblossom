@@ -15,9 +15,18 @@
 
   <body>
     <h1>설문</h1>
+    <div class="container">
+      <main>
+        {% bootstrap_messages %}
+        {% block content%}{% endblock %}
+      </main>
+    </div>
+    <script>
+      window.csrf_token = "{{ csrf_token }}";
+    </script>
+    <script src="{% static "js/ation_css.js" %}"></script>
 
-    {% block content%}{% endblock %}
-
+    {% block extra-script %}{% endblock extra-script %}
   </body>
 
 </html>

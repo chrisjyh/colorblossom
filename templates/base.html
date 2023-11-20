@@ -14,9 +14,20 @@
   </head>
 
   <body>
-    {% include 'header.html' %}
-    {% block content%}{% endblock %}
+    {% include 'header.html' %}    
+    <div class="container">
+      <main>
+        {% bootstrap_messages %}
+        {% block content%}{% endblock %}
+      </main>
+    </div>
     {% include 'footer.html' %}
+    <script>
+      window.csrf_token = "{{ csrf_token }}";
+    </script>
+    <script src="{% static "js/ation_css.js" %}"></script>
+
+    {% block extra-script %}{% endblock extra-script %}    
   </body>
 
 </html>

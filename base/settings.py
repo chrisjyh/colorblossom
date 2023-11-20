@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': env.str('DB_NAME',default='colorblossom'),
         'USER': env.str('DB_USER',default='root'),
-        'PASSWORD': env.str('DB_PASSWORD',default='1234'),
+        'PASSWORD': env.str('DB_PASSWORD',default='wndmsgh1002'),
         'HOST': env.str('DB_HOST',default='127.0.0.1'),
         'PORT': env.str('DB_PORT',default='3306'),
     }

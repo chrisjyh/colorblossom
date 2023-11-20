@@ -8,7 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls")),
     path('survey/', include("survey.urls")),
-    path("", TemplateView.as_view(template_name="root.html"), name="root")
+    path('faq/', include("faq.urls")),
+    path("", TemplateView.as_view(template_name="main.html"), name="main")
 ]
 
 

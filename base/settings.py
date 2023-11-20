@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     # local apps
     'accounts',
+    'faq',
+    'survey',
 ]
 
 MIDDLEWARE = [

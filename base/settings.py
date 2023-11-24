@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     # local apps
     'accounts',
     'faq',
-    'survey',
 ]
 
 MIDDLEWARE = [

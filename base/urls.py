@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls")),
     path('faq/', include("faq.urls")),
+    path('selftest/', include("selftest.urls")),
     path("", TemplateView.as_view(template_name="main.html"), name="main")
 ]
 

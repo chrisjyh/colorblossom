@@ -9,10 +9,27 @@
           </h1>
           <ul class="h-menu">
             <li>
-              <a href="program/aboutus.html">ABOUT US</a>
+              <a href="{% url "aboutUs" %}">ABOUT US</a>
             </li>
             <li>
-              <a href="program/program_basic.html">PROGRAM</a>
+                <a href="{% url "simpleExam" %}">PROGRAM</a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{% url 'simpleExam' %}">간단 진단</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'basicExam' %}">기본 진단</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'proExam' %}">프로 진단</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bodyExam' %}">골격 및 체형 진단</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'consultExam' %}">컨설턴트 <br> 양성 과정</a>
+                    </li>
+                </ul>
             </li>
             <li>
               <a href="{% url 'selftest' %}">SELF TEST</a>

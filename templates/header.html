@@ -1,36 +1,35 @@
 {% block header%}
   {%load static %}
-  <header class="header">
-    <nav class="header_wrap">
-      <h1 class="h-logo">
-        <a href="../html/index.html">
-          <img src="{% static '/img/logo.svg' %}" alt="pium">
-        </a>
-      </h1>
-      <ul class="h-menu">
-        <li>
-          <a href="">ABOUT US</a>
-        </li>
-        <li>
-          <a href="">PROGRAM</a>
-        </li>
-        <li>
-          <a href="">SELF TEST</a>
-        </li>
-        <li>
-          <a href="">RESERVATION</a>
-        </li>
-        <li>
-          <a href="">COMMUNITY</a>
-        </li>
-      </ul>
-      <div class="h-right">
-        <div class="h-lang_wrap">
-          <button>KOR</button>
-        </div>
-        <a href="" class="h-login_btn">LOGIN</a>
-      </div>
-    </nav>
+     <header class="header">
+        <nav class="header_wrap">
+          <h1 class="h-logo">
+            <a href="{% url "main" %}">
+              <img src="{% static 'img/logo.svg' %}" alt="pium">
+            </a>
+          </h1>
+          <ul class="h-menu">
+            <li>
+              <a href="program/aboutus.html">ABOUT US</a>
+            </li>
+            <li>
+              <a href="program/program_basic.html">PROGRAM</a>
+            </li>
+            <li>
+              <a href="{% url 'selftest' %}">SELF TEST</a>
+            </li>
+            <li>
+              <a href="./reservation/reservation.html">RESERVATION</a>
+            </li>
+            <li>
+              <a href="./community/community.html">COMMUNITY</a>
+            </li>
+          </ul>
+          <div class="h-right">
+            <div class="h-lang_wrap">
+              <button>KOR</button>
+            </div>
+            <a href="" class="h-login_btn">LOGIN</a>
+          </div>
+        </nav>
   </header>
-  <div class="header_padding_box"></div>
 {% endblock %}

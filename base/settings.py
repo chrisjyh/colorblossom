@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 
+import pymysql
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -98,11 +100,11 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env.str('DB_NAME',default='colorblossom'),
-        'USER': env.str('DB_USER',default='root'),
-        'PASSWORD': env.str('DB_PASSWORD',default='wndmsgh1002'),
-        'HOST': env.str('DB_HOST',default='127.0.0.1'),
-        'PORT': env.str('DB_PORT',default='3306'),
+        'NAME': env.str('DB_NAME', default='pium'),
+        'USER': env.str('DB_USER', default='root'),
+        'PASSWORD': env.str('DB_PASSWORD', default='wndmsgh1002'),
+        'HOST': env.str('DB_HOST', default='127.0.0.1'),
+        'PORT': env.str('DB_PORT', default='3306'),
     }
 }
 

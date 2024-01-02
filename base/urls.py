@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls")),
     path('faq/', include("faq.urls")),
+    path('reservation/', include("reservation.urls")),
     path('aboutus',TemplateView.as_view(template_name="aboutUs.html"), name="aboutUs"),
     path('program/basic',TemplateView.as_view(template_name="program/basicExamine.html"), name="basicExam"),
     path('program/body',TemplateView.as_view(template_name="program/bodyExamine.html"), name="bodyExam"),

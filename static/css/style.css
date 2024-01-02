@@ -80,7 +80,7 @@
 .main-introbox{align-self: flex-start; margin-top: 31vh;}
 .main-introbox strong{display: block; margin-bottom: 20px; text-align: center; font-size: 58px; line-height: 1.38; letter-spacing: -1.74px; font-weight: bold; color:#000;}
 .main-introbox p{display: block; margin-bottom: 62px; text-align: center; font-size: 18px; line-height: 1.44; letter-spacing: -1.44px;color: #333333;}
-.main-btn{display: block; margin: 0 auto; padding: 16px 20px 17px; width: 224px; height: 56px; border-radius: 6px; border: 1px solid #000; font-size: 18px; font-weight: bold;}
+.main-btn{display: block; margin: 0 auto; padding: 16px 20px 17px; width: 224px; height: 56px; border-radius: 6px; border: 1px solid #000; font-size: 18px; font-weight: bold; text-align: center}
 .main-btn:hover{background: #ff5c75; color: #fff; border: 0px;}
 
 .main-aboutsection{position: relative; margin: 0 auto; max-width: 1920px; width: 100%; height: 124vh;}
@@ -94,13 +94,13 @@
 .about-paintbox .paint_img{display: block; margin-bottom: 30px; max-width: 510px; width: 100%; z-index: 100;}
 .about-paintbox p{font-size: 16px; line-height: 1.5; text-align: left; color: #5a5a60;}
 
-.about-modelbox{float: left; display: block; position: relative; width: 73%; height: 80vh; z-index: 100;}
-.about-modelbox .model-img{margin-top: 10%; float:left; display: block; max-width: 858px; width: 100%; z-index: 101;}
+.about-modelbox{float: left; display: block; position: relative; height: 80vh; z-index: 100;}
+.about-modelbox .model-img{margin-top: 10%;display: block; max-width: 858px; width: 100%; z-index: 101;}
 
 .about-modelbox .pium-img{position: absolute; top: -2%; left: 39%; display: block; max-width: 321px; width: 100%;}
-.about-modelbox .color-img{position: absolute; top: 17%; left: 20; display: block; max-width: 328px; width: 100%;}
+.about-modelbox .color-img{position: absolute; top: 17%; left: 20%; display: block; max-width: 328px; width: 100%;}
 .about-modelbox .blossom-img{position: absolute; top: 34%; left: 20px; display: block; max-width: 519px; width: 100%;}
-.about-modelbox .about-explaincontent{float: left; position: relative; display: block; max-width: 400px; width: 100%; height: 100%;}
+.about-modelbox .about-explaincontent{position: absolute; right: -45%; bottom: 0; display: block; max-width: 400px; width: 100%; height: 100%;}
 .about-explaincontent p{ position: absolute; bottom: 0; left: 20px; display: block; color: #5a5a60; line-height: 1.5; }
 .about-modelbox::after{clear: both; content: ""; display: block;} 
 

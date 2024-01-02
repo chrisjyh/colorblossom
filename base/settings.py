@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     # local apps
     'accounts',
     'faq',
+    'reservation',
 ]
 
 MIDDLEWARE = [

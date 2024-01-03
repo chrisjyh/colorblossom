@@ -38,7 +38,15 @@
               <a href="{% url 'reservationMain' %}">RESERVATION</a>
             </li>
             <li>
-              <a href="./community/community.html">COMMUNITY</a>
+                <a href="{% url 'faqPage' %}">COMMUNITY</a>
+                <ul class="sub-menu type-two">
+                    <li>
+                        <a href="{% url 'faqPage' %}">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'askInformationPage' %}">1:1 문의</a>
+                    </li>
+                </ul>
             </li>
           </ul>
           <div class="h-right">

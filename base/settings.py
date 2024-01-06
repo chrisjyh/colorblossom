@@ -9,12 +9,10 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import environ
 
-# import pymysql
-# pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +39,7 @@ SECRET_KEY = env.str(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=True)  # 1,t, true
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['*'])
 
 
 # Application definition
@@ -100,13 +98,9 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env.str('DB_NAME', default='pium'),
-        'USER': env.str('DB_USER', default='root'),
-        'PASSWORD': env.str('DB_PASSWORD', default='wndmsgh1002'),
-        'HOST': env.str('DB_HOST', default='127.0.0.1'),
-        'PORT': env.str('DB_PORT', default='3306'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -147,15 +141,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = env.str('STATIC_ROOT', default=BASE_DIR / 'staticfiles')
+STATIC_URL = "static/"
+STATIC_ROOT = env.str("STATIC_ROOT", default=BASE_DIR / "staticfiles")
 STATICFILES_DIRS = [
-     BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
  
 MEDIA_URL = '/media/'
-MEDIA_ROOT = env.str('MEDIA_ROOT', default=BASE_DIR / 'media')
+# MEDIA_ROOT = env.str('MEDIA_ROOT', default=BASE_DIR / 'media')
 
 
 # Default primary key field type

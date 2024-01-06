@@ -3,7 +3,7 @@
 .header{display: block; }
 .header_wrap{position: absolute; display: flex; align-items: center; justify-content: space-between; padding: 0 50px; width: 100%; height: 84px;}
 .header_wrap .h-logo{width: 66px;}
-.header_wrap .h-menu{position: absolute; left: 50%; top: 50%; display: flex; align-items: center; font-size: 16px; font-weight: 700; transform: translate(-50%,-50%);}
+.header_wrap .h-menu{position: absolute; left: 50%; top: 50%; display: flex; align-items: center; font-size: 16px; font-weight: 700; transform: translate(-50%,-50%); z-index: 100}
 .header_wrap .h-menu > li{position: relative; margin-right: 60px; line-height: 84px}
 .header_wrap .h-menu > li:hover::after {position: absolute; display: flex; width: 100%; height: 1px; bottom: 20px; background: #ff5c75; content: ""}
 .header_wrap .h-menu li:hover > a {color: #ff5c75;}
@@ -15,7 +15,7 @@
 .header_wrap .h-lang_wrap button::after{content: ''; display: inline-block; width: 12px; height: 12px; background: url(../img/h-lang-arrow.svg) no-repeat; margin-left: 3px;}
 .header_wrap .h-login_btn{font-size: 16px; font-weight: 700;}
 
-.sub-menu {position: absolute; left: -250px; top: 80px; display: none; align-items: center; justify-content: space-between; padding: 0 20px 20px; width: 1080px; border-radius: 0 0 22px 22px; background: #fff}
+.sub-menu {position: absolute; left: -250px; top: 80px; display: none; align-items: center; justify-content: space-between; padding: 0 20px 20px; width: 1080px; border-radius: 0 0 22px 22px; background: #fff; z-index: 999;}
 .sub-menu.type-two {left: -100px; width: 300px;}
 .sub-menu li {padding: 12px 20px; width: 150px; line-height: 1.5; text-align: center; border-radius: 22px; background: #f8f8f9;}
 .sub-menu li:hover {background: #ff5c75}

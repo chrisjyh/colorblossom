@@ -6,4 +6,4 @@ def faqTemplate(request):
     return render(request, "faq/faq.html")
 
 def askInformation(request):
-    return render(request, "faq/faq.html")
+    return render(request, "faq/community.html")

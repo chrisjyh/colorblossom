@@ -24,7 +24,8 @@
 /* #################### reset css #################### */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{margin: 0; padding: 0; box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;}
+	-moz-box-sizing: border-box;
+font-family: 'SUIT';}
 html, body, input, textarea, select, button, table, li, dd, p, b, span, em, strong{-webkit-text-size-adjust: none;}
 html{font-size: 16px; font-weight: 400; font-family: 'SUIT'; line-height: 1.1; color: #242424;}
 body{-webkit-text-size-adjust: none; font-family: 'SUIT';}
@@ -42,7 +43,7 @@ img{font-size: 0; line-height: 0; vertical-align: top;}
 caption{visibility: hidden; overflow: hidden; width: 0; height: 0; font-size: 0; line-height: 0;}
 /* legend, label span, .blind{visibility: hidden; overflow: hidden; position: absolute; left: 0; top: 0; margin: 0; padding: 0 !important; width: 0 !important; height: 0 !important; font-size: 0 !important; line-height: 0 !important;} */
 label{cursor: pointer;}
-pre{white-space: pre-wrap; word-wrap: break-word;}
+pre{white-space: pre-wrap; word-wrap: break-word; font-family: 'SUIT';}
 button{display: inline-block; margin: 0; padding: 0; border: 0; background: none; box-shadow: none; text-align: center; cursor: pointer; vertical-align: middle;}
 button::-moz-focus-inner{margin: 0; padding: 0; border: 0;}
 select option[value=""][disabled] {

@@ -149,11 +149,12 @@
 .faq-container {margin-bottom: 100px; width: 100%; min-height: 650px;}
 .faq-container h2{margin: 200px auto 90px; width: fit-content; font-size: 36px; font-weight: bold;}
 .faq-table {width: 100%; border-top: 1px solid #000}
-.faq-table li .question{position: relative; padding: 30px 50px; width: 100%; line-height: 1.5; border-bottom: 1px solid #d4d4d4}
+.faq-table li .question{position: relative; padding: 30px 50px; width: 100%; line-height: 1.5; border-bottom: 1px solid #d4d4d4; cursor: pointer}
 .faq-table li .question::after{display: block; position: absolute; top: 36%; left: 0; width: 25px; height: 25px; background: url(../img/faq/question.png) no-repeat; background-size: 20px; content: ""}
 .faq-table li .question::before{display: block; position: absolute; top: 36%; right: 20px; width: 25px; height: 25px; background: url(../img/faq/arrow.png) no-repeat; background-size: cover; content: ""}
 .faq-table li .question.on::before{display: block; position: absolute; top: 36%; right: 20px; width: 25px; height: 25px; background: url(../img/faq/arrow.png) no-repeat; background-size: cover; transform: rotate(180deg);content: ""}
-.faq-table li .answer{position: relative; display: none; padding: 30px 50px; width: 100%; line-height: 1.25; border-bottom: 1px solid #d4d4d4; background: #f8f8f9}
+.faq-table li .answer{position: relative; display: none; padding: 30px 50px; width: 100%; line-height: 1.25; border-bottom: 1px solid #d4d4d4; background: #f8f8f9; cursor: pointer}
+.faq-table li .answer > td{cursor: pointer}
 .faq-table li .answer::after{display: block; position: absolute; top: 24%; left: 15px; width: 25px; height: 25px; background: url(../img/faq/answer.png) no-repeat; background-size: 20px; content: ""}
 
 .faq-container.community h2{margin: 200px auto 0;}
@@ -167,6 +168,9 @@
 .community-table tr td:nth-child(2) {width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .community-table tr td:nth-child(3) {width: 20%}
 .community-table tr td:nth-child(4) {width: 15%}
+
+.cursor-pointer {cursor: pointer}
+
 @media (max-width: 900px) {
     .explain-section{position: static; top: auto; height: auto;}
 

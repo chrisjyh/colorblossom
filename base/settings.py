@@ -132,7 +132,7 @@ AUTH_USER_MODEL = "accounts.User"
 
 LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -141,14 +141,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-print("basedir: ", BASE_DIR)
 
 STATIC_URL = "/static/"
 STATIC_ROOT = env.str("STATIC_ROOT", default=BASE_DIR / "staticfiles")
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-print("STATIC_ROOT: ", STATICFILES_DIRS)
 
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = env.str('MEDIA_ROOT', default=BASE_DIR / 'media')

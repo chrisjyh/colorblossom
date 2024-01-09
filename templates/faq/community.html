@@ -6,9 +6,9 @@
             <div class="faq-container community">
             <h2>1 대 1 문의</h2>
                 <div class="btnBox-header">
-                    <button class="btn-community">
-                        1:1문의하기
-                    </button>
+                    <a class="btn-community" href="{% url 'askForm' %}">
+                        1:1 문의 하기
+                    </a>
                 </div>
                 <table class="community-table">
                     <thead>
@@ -19,13 +19,29 @@
                             <td>답변여부</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>결제/예약/상담</td>
-                            <td>제목</td>
-                            <td>23.10.29</td>
-                            <td>O</td>
-                        </tr>
+                    <tbody id="community_body">
+                        {% for ask in askList %}
+                            {% if ask.respond_content != "" %}
+                                <tr class="question cursor-pointer">
+                                    <td>{{ ask.askLabel }}</td>
+                                    <td>{{ ask.title }}</td>
+                                    <td>{{ ask.reg_date }}</td>
+                                    <td>O</td>
+                                </tr>
+                                <tr class="answer" style="display: none">
+                                    <td colspan="4">
+                                        {{ ask.respond_content }}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr class="question">
+                                    <td>{{ ask.askLabel }}</td>
+                                    <td>{{ ask.title }}</td>
+                                    <td>{{ ask.reg_date }}</td>
+                                    <td>X</td>
+                                </tr>
+                             {% endif %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -35,5 +51,14 @@
 
 {% block extra-script %}
     <script>
+        $(function() {
+            $(".question").click(function() {
+                $(this).next(".answer").stop().slideToggle(300);
+                $(this).toggleClass('on').siblings().removeClass('on');
+                $(this).next(".answer").siblings(".answer").slideUp(300);
+            });
+
+        });
+
     </script>
 {% endblock extra-script %}

@@ -8,3 +8,7 @@ class Faq(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class AskInformation(models.Model):
+    pass

@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -126,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # 커스텀 유저모델을 사용하기 위한 등록
 AUTH_USER_MODEL = "accounts.User"
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -141,12 +141,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = "static/"
+print("basedir: ", BASE_DIR)
+
+STATIC_URL = "/static/"
 STATIC_ROOT = env.str("STATIC_ROOT", default=BASE_DIR / "staticfiles")
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
- 
+print("STATIC_ROOT: ", STATICFILES_DIRS)
+
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = env.str('MEDIA_ROOT', default=BASE_DIR / 'media')
 

@@ -25,19 +25,26 @@
                                 <tr class="question cursor-pointer">
                                     <td>{{ ask.askLabel }}</td>
                                     <td>{{ ask.title }}</td>
-                                    <td>{{ ask.reg_date }}</td>
+                                    <td>{{ ask.dateFix }}</td>
                                     <td>O</td>
                                 </tr>
                                 <tr class="answer" style="display: none">
                                     <td colspan="4">
-                                        {{ ask.respond_content }}
+                                        <div class="ask-content">
+                                            {{ ask.content }}
+                                        </div>
+                                        <div class="return-answer">
+                                            <pre>
+                                                {{ ask.respond_content }}    
+                                            </pre>
+                                        </div>
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr class="question">
                                     <td>{{ ask.askLabel }}</td>
                                     <td>{{ ask.title }}</td>
-                                    <td>{{ ask.reg_date }}</td>
+                                    <td>{{ ask.dateFix }}</td>
                                     <td>X</td>
                                 </tr>
                              {% endif %}

@@ -5,4 +5,6 @@ urlpatterns = [
     path("", views.faqTemplate, name="faqPage"),
     path("community/", views.askInformation, name="askInformationPage"),
     path("askform/", views.askform, name="askForm"),
+    path("askform/formin/", views.post_ask_form, name="postAskForm"),
+
 ]

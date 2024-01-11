@@ -1,22 +1,151 @@
 {% extends 'base.html' %}
 
 {% block content%}
-    <main>
-        <div class="progress-high-bar">
-
+    {% load static %}
+    <main class="reservation-main">
+        <div class="reservation-notice">
+            <h2>RESERVATION</h2>
+            <p>
+                Color Blossom은 100% 예약제로 운영되고 있습니다.<br>
+                다른 예약자 분들께 피해가 가지 않도록 하기 위함이니 신중한 예약 부탁 드립니다. :)
+            </p>
+            <p>
+                예약 시점 ~ 진단 7일 전: 일정 변경 가능 및 전체 금액 환불<br>
+                일주일 이내 ~ 당일: 일정 변경 및 환불 불가
+            </p>
+            <p>
+                예약 일주일 전 ~ 예약 당일 기간 중 변경을 희망하신다면 컨설팅 총액의 50%를 추가로 결제해주셔야 합니다.<br>
+                경제적 이득을 위함이 아니라, 소중한 약속을 지켜주시길 바라는 마음으로 운영하는 제도이니 양해 부탁드립니다.
+            </p>
         </div>
-        <div class="reservation-explain-title">
-
-        </div>
-        <div class="">
+        <div class="wrap_reservation_box">
             <section class="reservation-box">
+                <h3>예약자 정보</h3>
+                {% csrf_token %}
+                <table class="res-table">
+                    <tbody id="res-table">
+                        <tr>
+                            <td>
+                                이름
+                            </td>
+                            <td>
+                                <input name="name" class="from-input" placeholder="이름을 입력하세요"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                이메일
+                            </td>
+                            <td>
+                                <input name="email" class="from-input" placeholder="이메일을 입력하세요"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                휴대폰 번호
+                            </td>
+                            <td>
+                                <input name="title" class="from-input" placeholder="휴대폰 번호를 01000000000형식으로 입력해주세요"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                참여 인원
+                            </td>
+                            <td>
+                                <select name="status" class="from-input">
+                                    <option value="1" >참여 인원을 선택해주세요</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" >3</option>
+                                    <option value="4" >4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                프로그램
+                            </td>
+                            <td>
+                                <select name="program_state" class="from-input">
+                                    <option value="" >프로그램을 선택하세요</option>
+                                    <option value="SIMPLE">간단진단</option>
+                                    <option value="BASIC">기본 진단</option>
+                                    <option value="BODY" >골격 진단</option>
+                                    <option value="PRO" >프로 진단</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding-top: 20px">
+                                프로그램 <br> 설명
+                            </td>
+                            <td>
+                                <ul class="choice-program-list">
+                                    <li>
+                                        <img src="{% static '/img/main/personal_link.png' %}" alt="">
+                                        <p>
+                                            <strong>퍼스널 컬러 간단 진단</strong>
+                                            나만의 고유한 피부색, 머리색, 눈색에 조화롭게 어울리는
+                                            퍼스널컬러를 분석하며 나에 대해 알아가는 과정입니다.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <img src="{% static '/img/main/body_link.png' %}" alt="">
+                                        <p>
+                                            <strong>골격 및 체형 진단</strong>
+                                            나만의 고유한 피부색, 머리색, 눈색에 조화롭게 어울리는
+                                            퍼스널컬러를 분석하며 나에 대해 알아가는 과정입니다.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <img src="{% static '/img/main/analist_link.png' %}" alt="">
+                                        <p>
+                                            <strong>퍼스널 컬러 기본 진단</strong>
+                                            나만의 고유한 피부색, 머리색, 눈색에 조화롭게 어울리는
+                                            퍼스널컬러를 분석하며 나에 대해 알아가는 과정입니다.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <img src="{% static '/img/main/bodyanalist_link.png' %}" alt="">
+                                        <p>
+                                            <strong>퍼스널 컬러 프로 진단</strong>
+                                            나만의 고유한 피부색, 머리색, 눈색에 조화롭게 어울리는
+                                            퍼스널컬러를 분석하며 나에 대해 알아가는 과정입니다.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </section>
 
-            <section class="choice-box">
-
+            <section class="reservation-box small">
+                <h3>예약 시간</h3>
+                <input type="text" id="datepicker" placeholder="예약일자를 선택해주세요" >
+                
+                <div class="res-btn-box">
+                    <button class="btn-black">예약</button>
+                </div>
             </section>
         </div>
-
     </main>
 {% endblock %}
+
+
+{% block extra-script %}
+    <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            dateFormat: "yy-mm-dd" ,
+        });
+    });
+
+    </script>
+{% endblock extra-script %}

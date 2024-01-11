@@ -11,6 +11,9 @@ class Faq(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = verbose_name_plural = "FAQ"
+
 
 class AskInformation(models.Model):
 
@@ -27,11 +30,16 @@ class AskInformation(models.Model):
 
     id = models.AutoField(primary_key=True)
     status = models.CharField(choices=Status.choices, default=Status.ETC, max_length=1)
+    name = models.CharField(max_length=100, null=False, default="익명")
+    email = models.EmailField(max_length=200, default="<Email>")
     title = models.CharField(max_length=500, null=False, default="제목 없음")
     content = models.TextField(default="")
     respond_content = models.TextField(default="")
-    reg_date = models.DateField(default=datetime.now)
+    reg_date = models.DateTimeField(auto_now=True)
     use_yn = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = verbose_name_plural = "1대1 문의"

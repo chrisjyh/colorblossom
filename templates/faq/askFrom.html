@@ -59,8 +59,9 @@
 
             </form>
                 <div class="error-message" id="errorMessage"></div>
-                <div class="bottom-btn-box">
-                    <button value="등록하기" id="submitBtn">등록하기</button>
+                <div class="ask-btn-box">
+                    <a href="{% url 'askInformationPage' %}" class="btn">이전으로</a>
+                    <a id="submitBtn" class="btn enroll">등록하기</a>
                 </div>
             </div>
         </section>
@@ -94,7 +95,7 @@
                 $("#errorMessage").html("");
                 $("#askForm").submit(); // Submit the form
             } else {
-                $("#errorMessage").html("모든 필드를 작성하세요.");
+                $("#errorMessage").html("모든 폼을 입력하여주세요");
             }
         });
 

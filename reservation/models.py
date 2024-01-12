@@ -1,3 +1,5 @@
+from datetime import timezone
+
 from django.db import models
 
 
@@ -5,9 +7,9 @@ from django.db import models
 
 class Reservation(models.Model):
     class Status(models.TextChoices):
-        PAYMENT = "PAYMENT", "예약금 입금"
         RESERVED = "RESERVED", "예약 완료"
         WAITTING = "WAITTING", "예약 대기"
+        CANCELLED = "CANCELLED", "예약 취소"
 
     class BookCourse(models.TextChoices):
         SIMPLE = "SIMPLE", "간단 진단"
@@ -26,15 +28,28 @@ class Reservation(models.Model):
     reservation_hour = models.BigIntegerField(null=False)
     reservation_min = models.BigIntegerField(null=False)
     reg_date = models.DateTimeField(auto_now=True)
-    use_yn = models.BooleanField(default=True)
 
     def show_date_time(self):
         return f"{self.reservation_date} {self.reservation_hour}:{self.reservation_min} "
 
     def __str__(self):
-        return self.title
+        return self.id
 
     class Meta:
         verbose_name = verbose_name_plural = "예약 관리"
 
 
+class ReservationConstraint(models.Model):
+    class Status(models.TextChoices):
+        OPEN = "OPEN", "영업 시간"
+        CLOSED = "CLOSED", "영업 종료"
+
+    id = models.AutoField(primary_key=True)
+    type = models.CharField(choices=Status.choices, default=Status.OPEN, max_length=50)
+    start_date = models.DateField(null=False)
+    end_date = models.DateField(null=False)
+    start_time = models.TimeField(null=False)
+    end_time = models.TimeField(null=False)
+
+    class Meta:
+        verbose_name = verbose_name_plural = "예약 제약"

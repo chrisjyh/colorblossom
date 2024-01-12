@@ -5,7 +5,8 @@
 .header_wrap.main{background: transparent}
 .header_wrap .h-logo{width: 66px;}
 .header_wrap .h-menu{position: absolute; left: 50%; top: 50%; display: flex; align-items: center; font-size: 16px; font-weight: 700; transform: translate(-50%,-50%); z-index: 100}
-.header_wrap .h-menu > li{position: relative; margin-right: 60px; line-height: 84px}
+.header_wrap .h-menu > li{position: relative; display: block; margin-right: 60px; line-height: 80px; height: 80px;}
+.header_wrap .h-menu > li > a{display: inline-block; vertical-align: middle;  text-align: center; line-height: 1.2;}
 .header_wrap .h-menu > li:hover::after {position: absolute; display: flex; width: 100%; height: 1px; bottom: 20px; background: #ff5c75; content: ""}
 .header_wrap .h-menu li:hover > a {color: #ff5c75;}
 .header_wrap .h-menu li:last-child{margin-right: 0;}
@@ -177,6 +178,10 @@
 .answer .ask-content{padding: 28px 20px 30px 20px; text-align: left}
 .answer .return-answer {padding: 40px; background: #f8f8f9; text-align: left}
 .cursor-pointer {cursor: pointer}
+.ask-btn-box {text-align: center; vertical-align: middle; padding: 20px}
+.ask-btn-box .btn{display: inline-block; width: 200px; border-radius: 6px; border:1px solid #d4d4d4; height: 56px; text-align: center; line-height: 56px; font-size: 16px}
+.ask-btn-box .btn.enroll{border: 1px solid #000000; background-color: #000; color: #fff}
+#errorMessage{text-align: center; line-height: 30px; color: red}
 
 .reservation-main {margin: 0 auto; padding: 120px 0 120px; max-width: 1300px; width: 100%; background: #fafafa}
 .reservation-notice {margin: 100px auto 60px; text-align: center}
@@ -185,14 +190,13 @@
 .wrap_reservation_box {width: 100%; display: flex; flex-wrap: nowrap; justify-content: space-around; align-items: flex-start;}
 .wrap_reservation_box .reservation-box {padding: 50px; max-width: 800px; width: 100%; background: #ffffff; border: 1px solid #d4d4d4; border-radius: 6px;}
 .wrap_reservation_box .reservation-box.small {padding: 50px 40px; max-width: 460px; width: 100%}
-
 .res-table {margin-top: 25px; width: 100%; border-top: 1px solid #5a5a60;}
 .res-table tr {height: 78px; border-bottom:1px solid #d4d4d4}
 .res-table tr td:nth-child(1) {width: 140px; text-align: left}
 .res-table tr td:nth-child(2) { padding: 18px 14px; width: calc(100% - 140px);  text-align: left}
 .res-table tr td .from-input {max-width: 518px; padding: 15px; width: 100%; height: 100%; border: 1px solid #d4d4d4}
+.res-table tr td .from-input.select-input {max-width: 200px; padding: 15px 20px 15px 15px}
 .res-btn-box .btn-black {padding: 18px; width: 100%; background: #000; color: #fff; border-radius: 6px;}
-
 .choice-program-list li {display: flex; justify-content: flex-start; align-items: stretch; align-content: center; margin-bottom: 10px}
 .choice-program-list li img {flex-shrink: 0; width: 120px;}
 .choice-program-list li p {flex-grow: 1; line-height: 1.2; vertical-align: center; padding: 20px;}

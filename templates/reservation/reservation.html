@@ -45,7 +45,7 @@
                                 휴대폰 번호
                             </td>
                             <td>
-                                <input name="title" class="from-input" placeholder="휴대폰 번호를 01000000000형식으로 입력해주세요"/>
+                                <input type="number" name="phone" class="from-input" placeholder="휴대폰 번호를 01000000000형식으로 입력해주세요"/>
                             </td>
                         </tr>
                         <tr>
@@ -53,8 +53,7 @@
                                 참여 인원
                             </td>
                             <td>
-                                <select name="status" class="from-input">
-                                    <option value="1" >참여 인원을 선택해주세요</option>
+                                <select name="reservation_many" class="from-input select-input">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3" >3</option>
@@ -71,8 +70,7 @@
                                 프로그램
                             </td>
                             <td>
-                                <select name="program_state" class="from-input">
-                                    <option value="" >프로그램을 선택하세요</option>
+                                <select name="course" class="from-input select-input">
                                     <option value="SIMPLE">간단진단</option>
                                     <option value="BASIC">기본 진단</option>
                                     <option value="BODY" >골격 진단</option>
@@ -131,7 +129,7 @@
                 <input type="text" id="datepicker" placeholder="예약일자를 선택해주세요" >
                 
                 <div class="res-btn-box">
-                    <button class="btn-black">예약</button>
+                    <button class="btn-black" id="bookBtn">예약</button>
                 </div>
             </section>
         </div>
@@ -145,7 +143,50 @@
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd" ,
         });
+
+        $("#bookBtn").on("click",function(){
+            let name = $("input[name='name']").val();
+            let email = $("input[name='email']").val();
+            let phone = $("input[name='phone']").val();
+            let reservation_many = $("select[name='reservation_many']").val();
+            let course = $("select[name='course']").val();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^\d{10}$/;
+
+            if(!emailRegex.test(email)){
+                alert("이메일 형식이 맞지 않습니다.")
+                return false;
+            }
+
+             let formData = {
+                name: name,
+                email: email,
+                phone: phone,
+                reservation_many: reservation_many,
+                course: course
+            };
+            sendRequest(formData)
+        });
     });
+
+    function sendRequest(data) {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        $.ajax({
+            headers: {"X-CSRFToken": csrftoken},
+            url: "{% url 'dateSearch' %}",
+            method: 'POST',
+            data: data,
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
 
     </script>
 {% endblock extra-script %}

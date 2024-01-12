@@ -4,6 +4,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path("", views.reservationMain, name="reservationMain")
+    path("", views.reservationMain, name="reservationMain"),
+    path("dateSearch/", views.dateSearch, name="dateSearch")
 ]
 

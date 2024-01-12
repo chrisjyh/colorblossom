@@ -47,6 +47,13 @@
                                     <td>{{ ask.dateFix }}</td>
                                     <td>X</td>
                                 </tr>
+                                <tr class="answer" style="display: none">
+                                    <td colspan="4">
+                                        <div class="ask-content">
+                                            {{ ask.content }}
+                                        </div>
+                                    </td>
+                                </tr>
                              {% endif %}
                         {% endfor %}
                     </tbody>

@@ -2,6 +2,8 @@ from datetime import timezone
 
 from django.db import models
 
+from accounts.models import ReservationUser
+
 
 # Create your models here.
 
@@ -20,14 +22,19 @@ class Reservation(models.Model):
     id = models.AutoField(primary_key=True)
     status = models.CharField(choices=Status.choices, default=Status.WAITTING, max_length=50)
     course = models.CharField(choices=BookCourse.choices, default=BookCourse.SIMPLE, max_length=50)
+    user = models.ForeignKey(ReservationUser, on_delete=models.CASCADE)
     reservation_many = models.IntegerField(default=1)
-    name = models.CharField(max_length=100, null=False, default="익명")
-    email = models.EmailField(max_length=200, default="<Email>")
-    phone = models.CharField(max_length=50, null=False, default="010-0000-0000")
     reservation_date = models.DateField(null=False)
     reservation_hour = models.BigIntegerField(null=False)
     reservation_min = models.BigIntegerField(null=False)
     reg_date = models.DateTimeField(auto_now=True)
+
+    def userName(self):
+        return self.user.name
+    def userEmail(self):
+        return self.user.email
+    def userPhone(self):
+        return self.user.phone
 
     def show_date_time(self):
         return f"{self.reservation_date} {self.reservation_hour}:{self.reservation_min} "

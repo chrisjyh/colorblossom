@@ -195,7 +195,7 @@
 .res-table tr td:nth-child(1) {width: 140px; text-align: left}
 .res-table tr td:nth-child(2) { padding: 18px 14px; width: calc(100% - 140px);  text-align: left}
 .res-table tr td .from-input {max-width: 518px; padding: 15px; width: 100%; height: 100%; border: 1px solid #d4d4d4}
-.res-table tr td .from-input.select-input {max-width: 200px; padding: 15px 20px 15px 15px}
+.res-table tr td .from-input.select-input {max-width: 130px; padding: 15px 20px 15px 15px}
 .res-btn-box .btn-black {padding: 18px; width: 100%; background: #000; color: #fff; border-radius: 6px;}
 .choice-program-list li {display: flex; justify-content: flex-start; align-items: stretch; align-content: center; margin-bottom: 10px}
 .choice-program-list li img {flex-shrink: 0; width: 120px;}

@@ -22,7 +22,7 @@ class Reservation(models.Model):
     id = models.AutoField(primary_key=True)
     status = models.CharField(choices=Status.choices, default=Status.WAITTING, max_length=50)
     course = models.CharField(choices=BookCourse.choices, default=BookCourse.SIMPLE, max_length=50)
-    user = models.ForeignKey(ReservationUser, on_delete=models.CASCADE)
+    user = models.CharField(max_length=200)
     reservation_many = models.IntegerField(default=1)
     reservation_date = models.DateField(null=False)
     reservation_hour = models.BigIntegerField(null=False)
@@ -40,7 +40,7 @@ class Reservation(models.Model):
         return f"{self.reservation_date} {self.reservation_hour}:{self.reservation_min} "
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         verbose_name = verbose_name_plural = "예약 관리"

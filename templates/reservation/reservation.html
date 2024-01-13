@@ -71,8 +71,8 @@
                             </td>
                             <td>
                                 <select name="course" class="from-input select-input">
-                                    <option value="SIMPLE">간단진단</option>
                                     <option value="BASIC">기본 진단</option>
+                                    <option value="SIMPLE">간단진단</option>
                                     <option value="BODY" >골격 진단</option>
                                     <option value="PRO" >프로 진단</option>
                                 </select>
@@ -125,9 +125,22 @@
             </section>
 
             <section class="reservation-box small">
-                <h3>예약 시간</h3>
-                <input type="text" id="datepicker" placeholder="예약일자를 선택해주세요" >
-                
+                <h3>예약 날짜</h3>
+                <input type="text" id="datepicker" placeholder="예약일자를 선택해주세요" class="date-search-btn">
+                <h3>예약 가능 시간</h3>
+                <div class="select-box">
+                    <select id="date_hour" class="select-input">
+                        <option>9시</option>
+                    </select>
+                    <select id="date_min" class="select-input">
+                        <option value="0">00분</option>
+                        <option value="10">10분</option>
+                        <option value="20">20분</option>
+                        <option value="30">30분</option>
+                        <option value="40">40분</option>
+                        <option value="50">50분</option>
+                    </select>
+                </div>
                 <div class="res-btn-box">
                     <button class="btn-black" id="bookBtn">예약</button>
                 </div>
@@ -140,51 +153,118 @@
 {% block extra-script %}
     <script>
     $(function() {
+
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd" ,
         });
 
-        $("#bookBtn").on("click",function(){
-            let name = $("input[name='name']").val();
-            let email = $("input[name='email']").val();
-            let phone = $("input[name='phone']").val();
-            let reservation_many = $("select[name='reservation_many']").val();
-            let course = $("select[name='course']").val();
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const phoneRegex = /^\d{10}$/;
+        let name = $("input[name='name']").val();
+        let email = $("input[name='email']").val();
+        let phone = $("input[name='phone']").val();
+        let reservation_many = $("select[name='reservation_many']").val();
+        let course = $("select[name='course']").val();
+        let date = $("#datepicker").val();
+        let time_hour = $("#date_hour").val();
+        let time_min = $("#date_min").val();
 
+        // 날짜 변경시 시간조회 함수
+        $("#datepicker").on("change",function (){
+            let findDate_url = "{% url 'dateSearch' %}"
+            date = $("#datepicker").val();
+
+            let searchData = {
+                reservation_many: reservation_many,
+                course: course,
+                date: date,
+            };
+            sendRequest(searchData, findDate_url, "date")
+        });
+
+        // 최종 예약 버튼
+        $("#bookBtn").on("click",function(){
+            name = $("input[name='name']").val();
+            email = $("input[name='email']").val();
+            phone = $("input[name='phone']").val();
+            reservation_many = $("select[name='reservation_many']").val();
+            course = $("select[name='course']").val();
+            date = $("#datepicker").val();
+            time_hour = $("#date_hour").val();
+            time_min = $("#date_min").val();
+            
+            let enroll_url = "{% url 'enrollReservation' %}"
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            console.log(email)
             if(!emailRegex.test(email)){
                 alert("이메일 형식이 맞지 않습니다.")
                 return false;
             }
 
-             let formData = {
+            if(course=="SIMPLE" && reservation_many=="1"){
+                alert("간단진단은 2인부터 가능합니다")
+            }
+
+            let fromData = {
                 name: name,
                 email: email,
                 phone: phone,
                 reservation_many: reservation_many,
-                course: course
+                course: course,
+                date: date,
+                hour: time_hour,
+                min: time_min,
             };
-            sendRequest(formData)
+            sendRequest(fromData,enroll_url,"enroll")
         });
     });
 
-    function sendRequest(data) {
+    // 전송 함수
+    function sendRequest(data, url, type) {
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
         $.ajax({
             headers: {"X-CSRFToken": csrftoken},
-            url: "{% url 'dateSearch' %}",
+            url: url,
             method: 'POST',
             data: data,
             success: function (response) {
-                console.log(response);
+                switch (type){
+                    case "date":
+                        responseSuccess(response);
+                        break;
+                    case "enroll":
+                        responseEnroll(response)
+                }
             },
             error: function (error) {
                 console.log(error);
             }
         });
+    }
+
+    function responseEnroll(response){
+        console.log("enroll success")
+    }
+
+    function responseSuccess(response){
+        data = response.data
+        console.log(data)
+        if(data.workingDay == "closed"){
+            $("#date_hour").html("")
+            $("#date_min").prop("disabled", "disabled")
+            return false
+        }else{
+            hour = ""
+            min = ""
+            let start_time = data.workingTime[0].start_time.split(":")
+            let end_time = data.workingTime[0].end_time.split(":")
+            for(let i = parseInt(start_time[0]); i <= parseInt(end_time[0]); i++){
+                hour += `<option value="${i}">${i}</option>`;
+            }
+
+            $("#date_min").removeAttr("disabled")
+            $("#date_hour").html(hour)
+        }
     }
 
 

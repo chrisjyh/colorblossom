@@ -144,6 +144,7 @@
 
 .sample_box--full {max-width: 1920px; width: 100%; margin: 0 auto}
 .sample_box--full .sample_img{width: 100%}
+.sample_box--full .sample_img.m {width: 100%; max-width: 580px; margin: 0 auto; display: block;}
 .sample_box--full.padding_top_header {padding-top: 84px}
 
 .middle-section {margin: 0 auto; padding: 0 20px; max-width: 1380px; width: 100%; }
@@ -190,6 +191,7 @@
 .wrap_reservation_box {width: 100%; display: flex; flex-wrap: nowrap; justify-content: space-around; align-items: flex-start;}
 .wrap_reservation_box .reservation-box {padding: 50px; max-width: 800px; width: 100%; background: #ffffff; border: 1px solid #d4d4d4; border-radius: 6px;}
 .wrap_reservation_box .reservation-box.small {padding: 50px 40px; max-width: 460px; width: 100%}
+.reservation-box #datepicker {margin: 20px 0 30px 0; padding: 15px 20px; border-radius: 6px; border: 1px solid #d4d4d4; }
 .res-table {margin-top: 25px; width: 100%; border-top: 1px solid #5a5a60;}
 .res-table tr {height: 78px; border-bottom:1px solid #d4d4d4}
 .res-table tr td:nth-child(1) {width: 140px; text-align: left}
@@ -202,6 +204,8 @@
 .choice-program-list li p {flex-grow: 1; line-height: 1.2; vertical-align: center; padding: 20px;}
 .choice-program-list li p strong{display: block; margin-bottom: 12px}
 
+.select-box {margin: 20px 0 30px;}
+.select-box .select-input {width: 40%; padding: 15px 20px; border: 1px solid #d4d4d4; border-radius: 6px}
 
 @media (max-width: 900px) {
     .explain-section{position: static; top: auto; height: auto;}

@@ -40,12 +40,12 @@ class ReservationUser(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
     phone = models.CharField(max_length=20)
-    consultResult = models.CharField(choices=PersonalColor.choices, null=True, max_length=50)
-    consultResult02 = models.CharField(choices=PersonalColor.choices, null=True, max_length=50)
+    consultResult = models.CharField(choices=PersonalColor.choices,null=True, blank=True, max_length=50)
+    consultResult02 = models.CharField(choices=PersonalColor.choices, null=True, blank=True, max_length=50)
     reg_date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         verbose_name = verbose_name_plural = "회원관리"

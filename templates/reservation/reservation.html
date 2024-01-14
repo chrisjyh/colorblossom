@@ -156,7 +156,27 @@
 
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd" ,
+            beforeShowDay: disableDays
         });
+        let Days = ["2024-1-14","2024-1-15","2024-1-26"];
+        function disableDays(date) {
+            let m = date.getMonth();
+            let d = date.getDate();
+            let y = date.getFullYear();
+
+            // 일요일 선택 금지 일(0) 토(6)
+            if(date.getDay() === 0){
+                return [false];
+            }
+
+            // 일자 선택 금지
+            for (i = 0; i < Days.length; i++) {
+                if(($.inArray(y + '-' +(m+1) + '-' + d,Days) !== -1 )) {
+                    return [false];
+                }
+            }
+            return [true];
+        }
 
         let name = $("input[name='name']").val();
         let email = $("input[name='email']").val();

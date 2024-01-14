@@ -16,20 +16,27 @@ class User(AbstractUser):
 
 
 class PersonalColor(models.TextChoices):
-    SPRINGBRIGHT = "SPRINGBRIGHT", "봄 브라이트"
-    SPRINGTRUE = "SPRINGTRUE", "봄 트루"
-    SUMMERBRIGHT = "SUMMERBRIGHT", "여름 브라이트"
-    SUMMERMUTE = "SUMMERMUTE", "여름 트루"
-    FALLBRIGHT = "FALLBRIGHT", "가을 브라이트"
-    FALLTRUE = "FALLTRUE", "가을 트루"
+    SPRINGBLIGHT = "SPRINGBLIGHT", "봄 브라이트"
+    SPRINGLIGHT = "SPRINGLIGHT", "봄 라이트"
+    SUMMERBLIGHT = "SUMMERBLIGHT", "여름 브라이트"
+    SUMMERLIGHT = "SUMMERLIGHT", "여름 라이트"
+    SUMMERMUTE = "SUMMERMUTE", "여름 뮤트"
+    FALLMUTE = "FALLMUTE", "가을 뮤트"
     FALLDEEP = "FALLDEEP", "가을 딥"
-    WINTERBRIGHT = "WINTERBRIGHT", "겨울 브라이트"
+    WINTERBLIGHT = "WINTERBLIGHT", "겨울 브라이트"
     WINTERDEEP = "WINTERDEEP", "겨울 딥"
 
-
 class RecommendMarkup(models.Model):
+    class TOOL(models.TextChoices):
+        BASE = "BASE", "베이스"
+        SHADOW = "SHADOW", "쉐도우"
+        BLUSHER = "BLUSHER", "블러셔"
+        LIP = "LIP", "립"
+
     type = models.CharField(choices=PersonalColor.choices, default=PersonalColor.SPRINGBRIGHT, max_length=50)
     content = models.TextField()
+    tool = models.CharField(choices=TOOL.choices, null=True, blank=True, max_length=20)
+
     link = models.URLField(blank=True)
     class Meta:
         verbose_name = verbose_name_plural = "화장품추천"

@@ -42,4 +42,4 @@ class AskInformation(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = verbose_name_plural = "1대1 문의"
+        verbose_name = verbose_name_plural = "1:1 문의"

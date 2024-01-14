@@ -42,6 +42,7 @@ class ReservationUser(models.Model):
     phone = models.CharField(max_length=20)
     consultResult = models.CharField(choices=PersonalColor.choices,null=True, blank=True, max_length=50)
     consultResult02 = models.CharField(choices=PersonalColor.choices, null=True, blank=True, max_length=50)
+    memo = models.TextField(blank=True, null=True)
     reg_date = models.DateField(auto_now=True)
 
     def __str__(self):

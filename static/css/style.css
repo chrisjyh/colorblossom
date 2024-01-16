@@ -207,6 +207,16 @@
 .select-box {margin: 20px 0 30px;}
 .select-box .select-input {width: 40%; padding: 15px 20px; border: 1px solid #d4d4d4; border-radius: 6px}
 
+.section-login {margin: 0 auto; max-width: 1348px; width: 100%; height: 70vh; display: flex; justify-content: center;flex-direction: column;align-items: center;}
+.login_box {padding: 50px 30px; width: 320px; border: 1px solid #9898a2; border-radius: 6px;text-align: center}
+.login_box h2 {margin-bottom: 20px; font-size: 36px; line-height: 1.2;}
+.login_box p {margin-bottom: 15px; font-weight: normal; font-size: 16px; line-height: 1.5; text-align: center}
+.login_box .login_input{display: block; margin: 0 auto; padding: 15px; padding-right: 0; width: 250px; border: 1px solid #d4d4d4}
+.login_box .btn-black{margin-top: 20px; width: 150px; height: 50px; border-radius: 6px; font-size: 16px; font-weight: 600; line-height: 50px; color: #fff; background: #000; cursor: pointer}
+
+.section-mypage {margin:0 auto; max-width: 1348px; width: 100%}
+.section-mypage {margin:0 auto; max-width: 1348px; width: 100%}
+
 @media (max-width: 900px) {
     .explain-section{position: static; top: auto; height: auto;}
 

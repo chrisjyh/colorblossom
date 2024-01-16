@@ -1,4 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content%}
+    {% load static %}
+    <section class="section-mypage">
+        <h2>MY PAGE</h2>
+        <div class="head-box">
+            <img src="{% static 'img/mypage/pium_mypage.png' %}" alt="">
+            <div class="user_name">
+                {{ data.user }}
+            </div>
+            <div class="btn_box">
+                <a href="https://pin.it/crspmrsog">핀터레스트 보드</a>
+            </div>
+        </div>
+        <h3>예약 현황</h3>
+        <div>
+            
+        </div>
+    </section>
+    <section class="section-mypage">
+        <h3>
+            메이크업 제품 목록
+        </h3>
+        <ul>
+            <li>
+                <a href=""> 문구</a>
+            </li>
+            
+        </ul>
+    </section>
+    {{ data.user }}
+
+
+    {{ data.status }}
+
+    {{ data.message }}
+
+
 {% endblock %}

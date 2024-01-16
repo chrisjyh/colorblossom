@@ -26,6 +26,22 @@ class PersonalColor(models.TextChoices):
     WINTERBLIGHT = "WINTERBLIGHT", "겨울 브라이트"
     WINTERDEEP = "WINTERDEEP", "겨울 딥"
 
+    def __str__(self):
+        # Customize the representation for each choice
+        custom_repr = {
+            self.SPRINGBLIGHT: "봄 브라이트",
+            self.SPRINGLIGHT:  "봄 라이트",
+            self.SUMMERBLIGHT: "여름 브라이트",
+            self.SUMMERLIGHT: "여름 라이트",
+            self.SUMMERMUTE: "여름 뮤트",
+            self.FALLMUTE: "가을 뮤트",
+            self.FALLDEEP: "가을 딥",
+            self.WINTERBLIGHT: "겨울 브라이트",
+            self.WINTERDEEP: "겨울 딥",
+        }
+
+        return custom_repr.get(self, super().__str__())
+
 class RecommendMarkup(models.Model):
     class TOOL(models.TextChoices):
         BASE = "BASE", "베이스"
@@ -33,7 +49,7 @@ class RecommendMarkup(models.Model):
         BLUSHER = "BLUSHER", "블러셔"
         LIP = "LIP", "립"
 
-    type = models.CharField(choices=PersonalColor.choices, default=PersonalColor.SPRINGBRIGHT, max_length=50)
+    type = models.CharField(choices=PersonalColor.choices, default=PersonalColor.SPRINGBLIGHT, max_length=50)
     content = models.TextField()
     tool = models.CharField(choices=TOOL.choices, null=True, blank=True, max_length=20)
 

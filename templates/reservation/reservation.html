@@ -152,13 +152,17 @@
 
 {% block extra-script %}
     <script>
+
     $(function() {
+        
 
         $("#datepicker").datepicker({
             dateFormat: "yy-mm-dd" ,
             beforeShowDay: disableDays
         });
-        let Days = ["2024-1-14","2024-1-15","2024-1-26"];
+        
+        let Days = ['']
+        
         function disableDays(date) {
             let m = date.getMonth();
             let d = date.getDate();
@@ -262,11 +266,13 @@
         });
     }
 
+    // 예약 확인 함수
     function responseEnroll(response){
         console.log("enroll success")
         alert("예약되었습니다.")
     }
 
+    // 가능 날짜 확인 함수
     function responseSuccess(response){
         data = response.data
         console.log(data)

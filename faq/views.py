@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from . import models
 from .models import AskInformation
@@ -16,6 +17,25 @@ def askInformation(request):
         ask.dateFix = ask.reg_date.strftime('%m월 %d일')
         ask.askLabel = askLabel
     return render(request, "faq/community.html", {'askList': askList})
+
+# 1 대 1 문의 본인인증
+def get_askInformation(request):
+    if request.method == "GET":
+        askList = models.AskInformation.objects.all().filter(use_yn=True, email=request.GET.get("email")).order_by('-reg_date')
+
+        for ask in askList:
+            askLabel = get_status_display(ask.status)
+            ask.dateFix = ask.reg_date.strftime('%m월 %d일')
+            ask.askLabel = askLabel
+
+        data = {
+            'data': list(askList.values()),
+            'status': 'success'
+        }
+
+        return JsonResponse(data)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
 
 def post_ask_form(request):
     if request.method == 'POST':

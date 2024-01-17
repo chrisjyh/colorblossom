@@ -2,6 +2,7 @@
 
 {% block content%}
     <main>
+        {% csrf_token %}
         <section class="middle-section">
             <div class="faq-container community">
             <h2>1 : 1 문의</h2>
@@ -20,42 +21,14 @@
                         </tr>
                     </thead>
                     <tbody id="community_body">
-                        {% for ask in askList %}
-                            {% if ask.respond_content != "" %}
-                                <tr class="question cursor-pointer">
-                                    <td>{{ ask.askLabel }}</td>
-                                    <td>{{ ask.title }}</td>
-                                    <td>{{ ask.dateFix }}</td>
-                                    <td>O</td>
-                                </tr>
-                                <tr class="answer" style="display: none">
-                                    <td colspan="4">
-                                        <div class="ask-content">
-                                            {{ ask.content }}
-                                        </div>
-                                        <div class="return-answer">
-                                            <pre>
-                                                {{ ask.respond_content }}    
-                                            </pre>
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr class="question">
-                                    <td>{{ ask.askLabel }}</td>
-                                    <td>{{ ask.title }}</td>
-                                    <td>{{ ask.dateFix }}</td>
-                                    <td>X</td>
-                                </tr>
-                                <tr class="answer" style="display: none">
-                                    <td colspan="4">
-                                        <div class="ask-content">
-                                            {{ ask.content }}
-                                        </div>
-                                    </td>
-                                </tr>
-                             {% endif %}
-                        {% endfor %}
+                        <tr>
+                            <td class="all" colspan="4">
+                                <p>문의하실때 사용하신 email을 입력하여주세요</p>
+                                <input type="text" class="form-input" name='email'>
+                                <button class="btn" id="emailConfirm">입력</button>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -66,13 +39,74 @@
 {% block extra-script %}
     <script>
         $(function() {
-            $(".question").click(function() {
+            $(".question").on("click",function() {
                 $(this).next(".answer").stop().slideToggle(300);
                 $(this).toggleClass('on').siblings().removeClass('on');
                 $(this).next(".answer").siblings(".answer").slideUp(300);
             });
+            $("#emailConfirm").on("click", function(){
+                let email = $("input[name='email']").val();
+                console.log(email)
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                data = {email: email}
+                let community_url = "{% url 'getAskInformation' %}"
 
+                if(!emailRegex.test(email)){
+                    alert("이메일 형식이 맞지 않습니다.")
+                    return false;
+                }else {
+                    sendRequest(data, community_url)
+                }
+            });
         });
+
+        function sendRequest(data, url) {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            $.ajax({
+                headers: {"X-CSRFToken": csrftoken},
+                url: url,
+                method: 'GET',
+                data: data,
+                success: function (response) {
+                    let tableDraw = ""
+                    var askList = response.data
+                    console.log(askList)
+                    askList.forEach((ask)=>{
+                        tableDraw += `
+                            <tr class="question cursor-pointer">
+                                <td>${ ask.status }</td>
+                                <td>${ ask.title }</td>
+                                <td>${ ask.reg_date.split("T")[0] }</td>
+                                ${ask.respond_content == "" ? "<td>X</td>" : "<td>0</td>"}
+                            </tr>
+                            <tr class="answer" style="display: none">
+                                <td colspan="4">
+                                    <div class="ask-content">
+                                        ${ ask.content }
+                                    </div>
+                                    <div class="return-answer">
+                                        <pre>
+                                            ${ ask.respond_content }
+                                        </pre>
+                                    </div>
+                                </td>
+                            </tr>
+                        `
+                    });
+                    $("#community_body").html(tableDraw)
+                    $(".question").on("click",function() {
+                        $(this).next(".answer").stop().slideToggle(300);
+                        $(this).toggleClass('on').siblings().removeClass('on');
+                        $(this).next(".answer").siblings(".answer").slideUp(300);
+
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
 
     </script>
 {% endblock extra-script %}

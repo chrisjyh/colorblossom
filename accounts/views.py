@@ -27,6 +27,10 @@ def myPage(request):
 
     user = models.ReservationUser.objects.all().filter(email=email)
 
+    if user.count() <= 0:
+        return redirect("login")
+
+
     for e in user:
         print(str(e.consultResult))
         print(str(e.consultResult02))

@@ -6,5 +6,6 @@ urlpatterns = [
     path("community/", views.askInformation, name="askInformationPage"),
     path("askform/", views.askform, name="askForm"),
     path("askform/formin/", views.post_ask_form, name="postAskForm"),
+    path("communitysearch/", views.get_askInformation, name="getAskInformation"),
 
 ]

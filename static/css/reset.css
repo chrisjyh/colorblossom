@@ -89,6 +89,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 @media screen and (min-width: 901px) {
 	.pc{display: block !important;}
-	.tablet{display: block !important;}
 	.mobile{display: none !important;}
+}
+
+@media screen and (max-width: 900px) {
+	.pc{display: none !important;}
+	.mobile{display: block !important;}
 }

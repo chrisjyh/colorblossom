@@ -39,11 +39,7 @@
 {% block extra-script %}
     <script>
         $(function() {
-            $(".question").on("click",function() {
-                $(this).next(".answer").stop().slideToggle(300);
-                $(this).toggleClass('on').siblings().removeClass('on');
-                $(this).next(".answer").siblings(".answer").slideUp(300);
-            });
+
             $("#emailConfirm").on("click", function(){
                 let email = $("input[name='email']").val();
                 console.log(email)
@@ -71,7 +67,6 @@
                 success: function (response) {
                     let tableDraw = ""
                     var askList = response.data
-                    console.log(askList)
                     askList.forEach((ask)=>{
                         tableDraw += `
                             <tr class="question cursor-pointer">
@@ -94,12 +89,18 @@
                             </tr>
                         `
                     });
+                    if(tableDraw === ""){
+                          tableDraw = `<tr>
+                                <td colspan="4" class="none-answer">
+                                    문의 내역이 없습니다.
+                                </td>
+                            </tr>`
+                    }
                     $("#community_body").html(tableDraw)
                     $(".question").on("click",function() {
                         $(this).next(".answer").stop().slideToggle(300);
                         $(this).toggleClass('on').siblings().removeClass('on');
                         $(this).next(".answer").siblings(".answer").slideUp(300);
-
                     });
                 },
                 error: function (error) {

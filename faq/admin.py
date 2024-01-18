@@ -11,7 +11,7 @@ class FaqAdmin(admin.ModelAdmin):
 
 
 @admin.register(AskInformation)
-class FaqAdmin(admin.ModelAdmin):
+class AskAdmin(admin.ModelAdmin):
     search_fields = ['title']
-    list_display = ['title', 'use_yn', 'reg_date', 'get_status_display']
+    list_display = ['title', 'use_yn', 'get_status_display', 'email', 'reg_date']
     list_filter = ['use_yn']

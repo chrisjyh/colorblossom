@@ -32,9 +32,6 @@ def myPage(request):
     if user.count() <= 0:
         return redirect("login")
 
-    type = []
-    type02 = {}
-
     for e in user:
         if e.consultResult:
             type = list(RecommendMarkup.objects.all().filter(type=str(e.consultResult)).values())
@@ -48,7 +45,7 @@ def myPage(request):
     print(user_data)
     data = {
         "userName": user_data[0].get("name"),
-        "res_data": res_data,
+        "res_data": res_data[0],
         "type": type,
         "type02": type02
 

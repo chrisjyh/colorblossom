@@ -219,8 +219,14 @@
 .login_box .btn-black{margin-top: 20px; width: 150px; height: 50px; border-radius: 6px; font-size: 16px; font-weight: 600; line-height: 50px; color: #fff; background: #000; cursor: pointer}
 
 .section-mypage {margin:80px auto 0; max-width: 1348px; width: 100%}
-.section-mypage .head-box {padding: 40px 50px; width: 100%; background: #f8f8f9; border-radius: 6px}
-.section-mypage .head-box img {width: 124px; height: 124px}
+.section-mypage h2 {margin: 160px auto 50px; width: 200px; font-size: 36px;}
+.section-mypage .head-box {padding: 40px 50px; width: 100%; background: #f8f8f9; border-radius: 6px; vertical-align: middle;}
+.section-mypage .head-box::after {clear:both; content: ""; display: block}
+.section-mypage .head-box .user_name {float: left; margin: 50px 0 0 40px; width: 300px; vertical-align: middle; font-size: 22px; font-weight: bold}
+.section-mypage .head-box img {float: left; display: block; width: 124px; height: 124px}
+.section-mypage .pinterest-black {float:right; display: block; margin-top: 40px; padding: 10px 16px; width: 200px; height: 50px; line-height: 30px; border-radius: 6px; font-size: 16px; font-weight: 600; text-align: center; vertical-align: middle; color: #fff; background: #000; cursor: pointer}
+
+
 @media (max-width: 900px) {
     .explain-section{position: static; top: auto; height: auto;}
 

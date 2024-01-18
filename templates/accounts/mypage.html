@@ -7,7 +7,16 @@
         <div class="head-box">
             <img src="{% static 'img/mypage/pium_mypage.png' %}" alt="">
             <div class="user_name">
-                {{ data.user }}
+                {% for user in data.user %}
+                    {{ user.email }}<br>
+                    {{ user.name }}<br>
+                {% endfor %}
+            <br>
+            {{ data.type }}
+
+            <br>
+            {{ data.type02 }}
+
             </div>
             <div class="btn_box">
                 <a href="https://pin.it/crspmrsog">핀터레스트 보드</a>

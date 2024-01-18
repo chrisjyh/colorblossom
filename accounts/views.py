@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
-from accounts.models import RecommendMarkup, ReservationUser
+from accounts.models import RecommendMarkup, ReservationUser, PersonalColor
 from reservation.models import Reservation
 
 
@@ -28,9 +28,23 @@ def myPage(request):
 
     user = ReservationUser.objects.all().filter(email=email)
     reservation = Reservation.objects.filter(user=email)
+    res_data = list(reservation.values())
+    user_data = list(user.values())
 
     if user.count() <= 0:
         return redirect("login")
+
+    personalColor = {
+        "SPRINGBLIGHT": "봄 브라이트",
+        "SPRINGLIGHT": "봄 라이트",
+        "SUMMERBLIGHT": "여름 브라이트",
+        "SUMMERLIGHT": "여름 라이트",
+        "SUMMERMUTE": "여름 뮤트",
+        "FALLMUTE": "가을 뮤트",
+        "FALLDEEP": "가을 딥",
+        "WINTERBLIGHT": "겨울 브라이트",
+        "WINTERDEEP": "겨울 딥",
+    }
 
     for e in user:
         if e.consultResult:
@@ -38,16 +52,21 @@ def myPage(request):
         if e.consultResult02:
             type02 = list(RecommendMarkup.objects.all().filter(type=str(e.consultResult02)).values())
 
-    res_data = list(reservation.values())
-    user_data = list(user.values())
+        if e.consultResult02:
+            data = {
+                "userName": user_data[0].get("name"),
+                "res_data": res_data[0],
+                "typeTitle": personalColor.get(type[0].get("type")),
+                "type02Title": personalColor.get(type02[0].get("type")),
+                "type": type,
+                "type02": type02
+            }
+        else:
+            data = {
+                "userName": user_data[0].get("name"),
+                "res_data": res_data[0],
+                "typeTitle": personalColor.get(type[0].get("type")),
+                "type": type
+            }
 
-    print(res_data)
-    print(user_data)
-    data = {
-        "userName": user_data[0].get("name"),
-        "res_data": res_data[0],
-        "type": type,
-        "type02": type02
-
-    }
     return render(request, 'accounts/mypage.html', {"data": data})

@@ -11,20 +11,91 @@
             </p>
             <a href="https://pin.it/crspmrsog" class="pinterest-black">핀터레스트 보드 ></a>
         </div>
-        <h3>예약 현황</h3>
-        <div>
-            
-        </div>
-    </section>
-    <section class="section-mypage">
+
+        <div class="mypage-box">
+            <h3>예약 현황</h3>
+            <table class="res-table">
+            <tbody id="res-table">
+                <tr>
+                    <td>예약 상태</td>
+                    {% if data.res_data.status == "WAITTING" %}
+                        <td>예약대기</td>
+                    {% elif data.res_data.status == "RESERVED" %}
+                        <td>예약 확정</td>
+                    {% elif data.res_data.status == "CANCELLED" %}
+                        <td>예약 취소</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>예약 일자</td>
+                    <td>
+                        {{ data.res_data.reservation_date }}
+                        {{ data.res_data.reservation_hour }} 시 {{ data.res_data.reservation_min }} 분
+                    </td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td>{{ data.res_data.user }}</td>
+                </tr>
+                <tr>
+                    <td>참여 인원</td>
+                    <td>{{ data.res_data.reservation_many }}</td>
+                </tr>
+                <tr>
+                    <td>신청 프로그램</td>
+                    <td>
+                        {% if data.res_data.course == "SIMPLE" %}
+                            특별 진단
+                        {% elif data.res_data.course == "BASIC" %}
+                            기본 진단
+                        {% elif data.res_data.course == "PRO" %}
+                            프로 진단
+                        {% elif data.res_data.course == "BODY" %}
+                           골격 진단
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mypage-box">
         <h3>
             메이크업 제품 목록
         </h3>
-        <ul>
-            <li>
-                <a href=""> 문구</a>
-            </li>
-            
+        <h4>
+            {{ data.typeTitle }}
+        </h4>
+        <ul class="makeup_list">
+            {% for tool in data.type %}
+                <li>
+                    <a href="{{ tool.link }}">
+                        <strong>
+                            {{ tool.tool }}
+                        </strong>
+                        {{ tool.content }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
+        {% if data.type02Title %}
+        <h4>
+            {{ data.type02Title }}
+        </h4>
+        <ul class="makeup_list">
+            {% for tool in data.type02 %}
+                <li>
+                    <a href="{{ tool.link }}">
+                        <strong>
+                            {{ tool.tool }}
+                        </strong>
+                        {{ tool.content }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
     </section>
+
+
 {% endblock %}

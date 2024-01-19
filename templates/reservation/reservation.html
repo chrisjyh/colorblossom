@@ -56,8 +56,8 @@
                                 <select name="reservation_many" class="from-input select-input">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
-                                    <option value="3" >3</option>
-                                    <option value="4" >4</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                     <option value="5">5</option>
                                     <option value="6">6</option>
                                     <option value="7">7</option>
@@ -210,14 +210,20 @@
             let enroll_url = "{% url 'enrollReservation' %}"
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            console.log(email)
+
             if(!emailRegex.test(email)){
                 alert("이메일 형식이 맞지 않습니다.")
                 return false;
             }
 
+            if(phone==="" && name===""){
+                alert("모든폼을 입력해주세요")
+                return false;
+            }
+
             if(course=="SIMPLE" && reservation_many=="1"){
                 alert("간단진단은 2인부터 가능합니다")
+                return false;
             }
 
             let fromData = {

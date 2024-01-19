@@ -138,11 +138,37 @@
                 </div>
             </section>
         </div>
+    <div class="layer_popup_wrap">
+{#        <button id="show-popup-btn">Show Popup</button>#}
+
+        <div id="overlay"></div>
+        <div id="popup-container">
+            <span id="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Popup Title</h2>
+            <p>This is the content of the popup. You can customize it as needed.</p>
+        </div>
+    </div>
     </main>
+
 {% endblock %}
 
 
 {% block extra-script %}
+    <script>
+    const showPopupBtn = document.getElementById('show-popup-btn');
+    const popupContainer = document.getElementById('popup-container');
+    const overlay = document.getElementById('overlay');
+
+    showPopupBtn.addEventListener('click', () => {
+      popupContainer.style.display = 'block';
+      overlay.style.display = 'block';
+    });
+
+    function closePopup() {
+      popupContainer.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+  </script>
     <script>
 
     $(function() {

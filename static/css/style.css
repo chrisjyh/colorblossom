@@ -232,6 +232,20 @@
 .section-mypage .makeup_list li{padding: 18px 14px; text-align: left; border-bottom: 1px solid #d4d4d4}
 .section-mypage .makeup_list li strong{display: block; margin-bottom: 10px; line-height: 1.5; font-weight: bold; }
 
+#wrap_popup{margin: 0;padding: 0;display: flex;align-items: center;justify-content: center; width:100%; height: 100vh;background-color: #f4f4f4;}
+#popup-container {display: none;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 20px;background-color: #fff;box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);z-index: 1000;}
+#popup-container h2 {margin-top: 0;}
+#overlay {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.5);z-index: 900;}
+#close-btn {cursor: pointer;position: absolute;top: 10px;right: 10px;font-size: 18px;}
+
+#show-popup-btn {
+cursor: pointer;
+padding: 10px;
+background-color: #3498db;
+color: #fff;
+border: none;
+border-radius: 5px;
+}
 
 @media (max-width: 900px) {
     .explain-section{position: static; top: auto; height: auto;}

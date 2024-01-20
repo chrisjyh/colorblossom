@@ -194,7 +194,7 @@
 .reservation-notice p{margin-bottom: 15px; font-weight: normal; font-size: 16px; line-height: 1.5; text-align: center}
 .wrap_reservation_box {width: 100%; display: flex; flex-wrap: wrap; justify-content: space-around; align-items: flex-start;}
 .wrap_reservation_box .reservation-box {padding: 50px; max-width: 800px; width: 100%; background: #ffffff; border: 1px solid #d4d4d4; border-radius: 6px;}
-.wrap_reservation_box .reservation-box.small {padding: 50px 40px; max-width: 460px; width: 100%}
+.wrap_reservation_box .reservation-box.small {margin-top: 50px; padding: 50px 40px; max-width: 460px; width: 100%}
 .reservation-box #datepicker {margin: 20px 0 30px 0; padding: 15px 20px; border-radius: 6px; border: 1px solid #d4d4d4; }
 .res-table {margin-top: 25px; width: 100%; border-top: 1px solid #5a5a60;}
 .res-table tr {height: 78px; border-bottom:1px solid #d4d4d4}

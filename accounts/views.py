@@ -13,12 +13,13 @@ def login_view(request):
 
 def loginConfirm(request):
     if request.method == 'GET':
-        request.POST.get("email")
-        user = ReservationUser.objects.all().filter(email=request.POST.get("email"))
+        request.GET.get("email")
+        user = ReservationUser.objects.all().filter(email=request.GET.get("email"))
+
         if user.count() > 0:
-            return JsonResponse({'status': 'success', 'data': user})
+            return JsonResponse({'status': 'success', 'message': 'successData'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+            return JsonResponse({'status': 'emailNone', 'message': 'Invalid request method.'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 
@@ -52,6 +53,7 @@ def myPage(request):
         if e.consultResult02:
             type02 = list(RecommendMarkup.objects.all().filter(type=str(e.consultResult02)).values())
 
+    try:
         if e.consultResult02:
             data = {
                 "userName": user_data[0].get("name"),
@@ -68,5 +70,11 @@ def myPage(request):
                 "typeTitle": personalColor.get(type[0].get("type")),
                 "type": type
             }
+    except e:
+        print(e)
+        data = {
+            "userName": user_data[0].get("name"),
+            "res_data": res_data[0]
+        }
 
     return render(request, 'accounts/mypage.html', {"data": data})

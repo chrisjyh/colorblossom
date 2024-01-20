@@ -42,7 +42,12 @@
                 method: 'get',
                 data: data,
                 success: function(success){
-                    window.location.href = "{% url 'myPage' %}"+"?email="+email
+                    console.log(success)
+                    if(success.status ==="emailNone") {
+                        alert("이메일 정보가 없습니다.")
+                    }else{
+                        window.location.href = "{% url 'myPage' %}"+"?email="+email
+                    }
                 },
                 error: function (error) {
                     console.log(error);

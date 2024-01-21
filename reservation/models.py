@@ -27,6 +27,8 @@ class Reservation(models.Model):
     reservation_date = models.DateField(null=False)
     reservation_hour = models.BigIntegerField(null=False)
     reservation_min = models.BigIntegerField(null=False)
+
+
     reg_date = models.DateTimeField(auto_now=True)
 
     def userName(self):

@@ -30,6 +30,17 @@ def myPage(request):
     user = ReservationUser.objects.all().filter(email=email)
     reservation = Reservation.objects.filter(user=email)
     res_data = list(reservation.values())
+
+    if len(res_data) == 0:
+        res_data = [
+            {
+                'status': 'custom',
+                'user': 'custom',
+                'course': 'custom'
+             }
+        ]
+    
+    print(res_data)
     user_data = list(user.values())
 
     if user.count() <= 0:
@@ -70,8 +81,7 @@ def myPage(request):
                 "typeTitle": personalColor.get(type[0].get("type")),
                 "type": type
             }
-    except e:
-        print(e)
+    except:
         data = {
             "userName": user_data[0].get("name"),
             "res_data": res_data[0]

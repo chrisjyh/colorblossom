@@ -128,10 +128,6 @@
                     <select id="date_hour" class="select-input">
                         <option>9시</option>
                     </select>
-                    <select id="date_min" class="select-input">
-                        <option value="0">00분</option>
-                        <option value="30">30분</option>
-                    </select>
                 </div>
                 <div class="res-btn-box">
                     <button class="btn-black" id="bookBtn">예약</button>
@@ -204,9 +200,10 @@
         let reservation_many = $("select[name='reservation_many']").val();
         let course = $("select[name='course']").val();
         let date = $("#datepicker").val();
-        let time_hour = $("#date_hour").val();
-        let time_min = $("#date_min").val();
-
+        let date_hour_time = $("#date_hour").val();
+        let time_hour = parseInt(date_hour_time.split(":")[0], 10);
+        let time_min = parseInt(date_hour_time.split(":")[1], 10);
+        
         // 날짜 변경시 시간조회 함수
         $("#datepicker").on("change",function (){
             let findDate_url = "{% url 'dateSearch' %}"
@@ -228,8 +225,9 @@
             reservation_many = $("select[name='reservation_many']").val();
             course = $("select[name='course']").val();
             date = $("#datepicker").val();
-            time_hour = $("#date_hour").val();
-            time_min = $("#date_min").val();
+            date_hour_time = $("#date_hour").val();
+            time_hour = parseInt(date_hour_time.split(":")[0], 10);
+            time_min = parseInt(date_hour_time.split(":")[1], 10);
             
             let enroll_url = "{% url 'enrollReservation' %}"
 
@@ -300,22 +298,20 @@
         console.log(data)
         if(data.workingDay == "closed"){
             $("#date_hour").html("")
-            $("#date_min").prop("disabled", "disabled")
             return false
         }else{
             hour = ""
             min = ""
-            let start_time = data.workingTime[0].start_time.split(":")
-            let end_time = data.workingTime[0].end_time.split(":")
-            for(let i = parseInt(start_time[0]); i <= parseInt(end_time[0]); i++){
-                hour += `<option value="${i}">${i}</option>`;
-            }
 
-            $("#date_min").removeAttr("disabled")
+            let exceptTimes = data.exceptTime
+
+            exceptTimes.forEach(function(exceptTime){
+                console.log(exceptTime)
+                hour += `<option value="${exceptTime}">${exceptTime}</option>`;
+            });
+
             $("#date_hour").html(hour)
         }
     }
-
-
     </script>
 {% endblock extra-script %}

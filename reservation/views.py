@@ -15,7 +15,7 @@ from reservation.models import ReservationConstraint, Reservation
 def reservationMain(request):
     constraintList = ReservationConstraint.objects.all().filter(end_date__gte=datetime.now())
 
-    return render(request, "reservation/reservation.html", {'constraintList' : constraintList})
+    return render(request, "reservation/reservation.html", {'constraintList': constraintList})
 
 
 def enrollReservation(request):
@@ -55,19 +55,12 @@ def dateSearch(request):
         booked_query = models.Reservation.objects.all().filter(reservation_date=date).exclude(status="CANCELLED")
 
         # 오픈시간 범위
-        opening_time = list(consetraint.values("start_time","end_time"))[0]
+        opening_time = list(consetraint.values("start_time", "end_time"))[0]
         # 오픈 하는 시간들 리스트
-        opening_time_list = generate_time_fix_intervals(opening_time.get("start_time").strftime('%H:%M'), opening_time.get("end_time").strftime('%H:%M'))
+        opening_time_list = generate_time_fix_intervals(opening_time.get("start_time").strftime('%H:%M'),
+                                                        opening_time.get("end_time").strftime('%H:%M'))
         # 예약된 시간 리스트
-        # booked_list = list(booked_query.values("course","reservation_many","reservation_hour","reservation_min"))
-
-        print("opening_time_list--------------------")
-        print(opening_time_list)
-        print("booked_list--------------------")
-        # print(booked_list)
-        booked_list = [{'course': 'BASIC', 'reservation_many': 1, 'reservation_hour': 9, 'reservation_min': 0},
-         {'course': 'PRO', 'reservation_many': 1, 'reservation_hour': 18, 'reservation_min': 30},
-         {'course': 'SIMPLE', 'reservation_many': 2, 'reservation_hour': 11, 'reservation_min': 30}]
+        booked_list = list(booked_query.values("course", "reservation_many", "reservation_hour", "reservation_min"))
 
         type_consult = {
             # 간단 진단 인당 30분 2인 부터
@@ -82,24 +75,22 @@ def dateSearch(request):
         }
 
         for book in booked_list:
-            reservation_time = str(book["reservation_hour"])+":"+str(book["reservation_min"])
-            print("예약 시각"+reservation_time)
-            # 예약 총시간
-            workingTime = multiply_time_string(type_consult.get(book.get("course")), book.get("reservation_many"))
+            reservation_time = str(book["reservation_hour"]) + ":" + str(book["reservation_min"])
+            if book.get("reservation_many") >=2 and book.get("course") == "BASIC":
+                workingTime = multiply_time_string(type_consult.get("BASICMORE"), book.get("reservation_many"))
+            else:
+                workingTime = multiply_time_string(type_consult.get(book.get("course")), book.get("reservation_many"))
             break_add = add_time_string(workingTime, "00:30")
-
-            print("작업시간"+break_add)
             booked_time_list = generate_time_intervals(reservation_time, break_add, 30)
-            print("예약 불가 리스트")
-            print(booked_time_list)
+            opening_time_list = [time for time in opening_time_list if time not in booked_time_list]
 
         dataResult = {
             "workingDay": "open",
             "workingTime": list(consetraint.values("start_time", "end_time")),
-            "exceptTime": list("")
+            "exceptTime": opening_time_list
         }
 
-        # 영업일이 않일시 closed 반환
+        # 영업일이 안닐시 closed 반환
         closed = models.ReservationConstraint.objects.all().filter(
             start_date__lte=date, end_date__gte=date, type="CLOSED"
         )
@@ -119,6 +110,7 @@ def dateSearch(request):
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
+
 # 문자열 시간 만큼 더함
 def add_time_string(time_str, time_to_add_str):
     base_time_delta = datetime.strptime(time_str, "%H:%M") - datetime(1900, 1, 1)
@@ -128,6 +120,8 @@ def add_time_string(time_str, time_to_add_str):
     updated_time_str = (datetime(1900, 1, 1) + updated_time_delta).strftime("%H:%M")
 
     return updated_time_str
+
+
 # 문자열인 시간을 곱함
 def multiply_time_string(time_str, factor):
     time_delta = datetime.strptime(time_str, "%H:%M") - datetime(1900, 1, 1)
@@ -135,26 +129,26 @@ def multiply_time_string(time_str, factor):
     result_time_str = (datetime(1900, 1, 1) + multiplied_time_delta).strftime("%H:%M")
     return result_time_str
 
+
 # 시작 시각부터, time_to_add_str시간만큼 30분 단위로
-def generate_time_intervals(start_time_str, time_to_add_str, interval_minutes=30):
+def generate_time_intervals(start_time_str, duration_str, interval_minutes=30):
     start_time = datetime.strptime(start_time_str, "%H:%M")
-    time_to_add = datetime.strptime(time_to_add_str, "%H:%M")
+    duration = datetime.strptime(duration_str, "%H:%M")
+
+    end_time = start_time + timedelta(hours=duration.hour, minutes=duration.minute)
 
     result_times = [start_time.strftime("%H:%M")]
 
     current_time = start_time
-    target = "00:00"
-
-    while time_to_add != target:
-        add_time_string(target, "00:30")
+    while current_time + timedelta(minutes=interval_minutes) <= end_time:
         current_time += timedelta(minutes=interval_minutes)
-        print(current_time.strftime("%H:%M"))
         result_times.append(current_time.strftime("%H:%M"))
 
     return result_times
 
+
 # 작업 시간대 리스트 생성 함수
-def generate_time_fix_intervals(start_date,end_date):
+def generate_time_fix_intervals(start_date, end_date):
     start_time = datetime.strptime(start_date, '%H:%M')
     end_time = datetime.strptime(end_date, '%H:%M')
     interval = timedelta(minutes=30)
@@ -167,3 +161,4 @@ def generate_time_fix_intervals(start_date,end_date):
         current_time += interval
 
     return time_intervals
+
